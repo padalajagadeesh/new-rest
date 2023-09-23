@@ -1,0 +1,93 @@
+ 
+<div   class="container parent mt-5"  *ngIf="!flightBoolean">
+   <form [formGroup]="signupForm" >
+    <div class="form-group">
+        <label>Name</label>
+        <div class="col-sm-3">
+          <input type="text"  class="form-control " formControlName="Name">
+        </div>
+    </div>
+    <div class="error"    *ngIf="signupForm.controls.Name.invalid && (signupForm.controls.Name.dirty || signupForm.controls.Name.touched)">
+        <span>firstName is required</span>
+      </div>
+    <div  class="form-group">
+        <label>Email</label>
+        <div class="col-sm-3">
+          <input type="text"   class="form-control " formControlName="Email">
+        </div>
+        
+    </div>
+    <div  class="error"   *ngIf="signupForm.controls.Email.invalid && (signupForm.controls.Email.dirty || signupForm.controls.Email.touched)">
+        <span>Email is required</span>
+      </div>
+      <div>
+
+        <div  class="form-group">
+            <label>PhoneNumber</label>
+            <div class="col-sm-3">
+            <input type="text"  class="form-control " formControlName="PhoneNumber" maxlength="10">
+            </div>
+        </div>
+          <div class="error" *ngIf="signupForm.controls.PhoneNumber.invalid  && (signupForm.controls.PhoneNumber.dirty || signupForm.controls.PhoneNumber.touched)">
+            PhoneNumber is required
+          </div>
+          
+      </div>
+  
+    <div  class="form-group">
+        <label>date</label>
+        <div class="col-sm-3">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" formControlName="datePick" [min]="todayDate()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+         
+        </mat-form-field>
+        </div>
+    </div>
+    <div   class="error"  *ngIf="signupForm.controls.datePick.invalid && (signupForm.controls.datePick.dirty || signupForm.controls.datePick.touched)">
+        <span>date is required</span>
+      </div>
+    <div  class="form-group">
+        <label>Time</label>
+        <div class="col-sm-3">  
+        <input type="time" class="form-control " formControlName="Time" (change)="timeChange($event)" step="1800" >
+ 
+      </div>
+    </div>
+    <div   class="error"  *ngIf="signupForm.controls.Time.invalid && (signupForm.controls.Time.dirty || signupForm.controls.Time.touched)">
+        <span>Time is required</span>
+      </div>
+      <div  class="error" *ngIf="inValidTime">
+        <span>Enter the valid Time</span>
+      </div>
+    <div  class="form-group">
+        <label>Number of adults</label>
+        <div class="col-sm-3">
+        <input type="text"  class="form-control " formControlName="Numberofadults" maxlength="1">
+        </div>
+    </div>
+    <div  class="error"   *ngIf="signupForm.controls.Numberofadults.invalid && (signupForm.controls.Numberofadults.dirty || signupForm.controls.Numberofadults.touched)">
+        <span>Numberofadults is required</span>
+      </div>
+    <div  class="form-group mb-3">
+        <label>Number of childerns</label>
+        <div class="col-sm-3">
+        <input type="text"  class="form-control " formControlName="Numberofchilderns" maxlength="1">
+        </div>
+    </div>
+
+      <div class="form-group ml-5">
+        <div class="col-sm-3">
+          <button class="btn btn-primary form-control " (click)="bookTable()" [disabled]="signupForm.invalid || inValidTime">Reserve Table</button>
+          <!-- [disabled]="signupForm.invalid" -->
+      </div>
+      </div>
+    
+  </form>
+</div>
+<!-- {{showText}}**** -->
+
+<div *ngIf="flightBoolean">
+  <h1>BOOKING STATUS</h1>
+</div>
